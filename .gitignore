@@ -1,0 +1,12 @@
+# osx - https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+SlackMood.xcodeproj/project.xcworkspace
+SlackMood.xcodeproj/xcuserdata
+SlackMood.xcworkspace/
+Pods
