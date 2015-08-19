@@ -33,9 +33,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             "as_user" : true,
             "text" : moodMessage
         ]
-        var payload: [String: AnyObject] = [
-            "payload" : params
-        ]
         
         Alamofire
             .request(.POST, api_url, parameters: params, encoding: ParameterEncoding.URL, headers: nil)
