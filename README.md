@@ -9,7 +9,8 @@ setup cocoa pods
 > $ cd /path/to/SlackMood
 > $ pod install
 
-edit api key & channel
+edit api key & channel.
+You can find your api token [here](https://api.slack.com/web#authentication).
 
 > $ open SlackMood.xcworkspace
 
