@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5EED43991B833DD400A82B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED43981B833DD400A82B47 /* AppDelegate.swift */; };
-		5EED439B1B833DD400A82B47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED439A1B833DD400A82B47 /* ViewController.swift */; };
 		5EED439D1B833DD400A82B47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EED439C1B833DD400A82B47 /* Images.xcassets */; };
 		5EED43A01B833DD400A82B47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EED439E1B833DD400A82B47 /* Main.storyboard */; };
 		5EED43AC1B833DD400A82B47 /* SlackMoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED43AB1B833DD400A82B47 /* SlackMoodTests.swift */; };
@@ -30,7 +29,6 @@
 		5EED43931B833DD400A82B47 /* SlackMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlackMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EED43971B833DD400A82B47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EED43981B833DD400A82B47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5EED439A1B833DD400A82B47 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5EED439C1B833DD400A82B47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5EED439F1B833DD400A82B47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5EED43A51B833DD400A82B47 /* SlackMoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlackMoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				5EED43981B833DD400A82B47 /* AppDelegate.swift */,
-				5EED439A1B833DD400A82B47 /* ViewController.swift */,
 				5EED439C1B833DD400A82B47 /* Images.xcassets */,
 				5EED439E1B833DD400A82B47 /* Main.storyboard */,
 				5EED43961B833DD400A82B47 /* Supporting Files */,
@@ -283,7 +280,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EED439B1B833DD400A82B47 /* ViewController.swift in Sources */,
 				5EED43991B833DD400A82B47 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
