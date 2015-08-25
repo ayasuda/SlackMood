@@ -25,8 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         let name   = notification?.userInfo?["Name"] as? String ?? "none"
         let artist = notification?.userInfo?["Artist"] as? String ?? "none"
-        let moodMessage = "listening... " + name + " - " + artist
-
+        let album = notification?.userInfo?["Album"] as? String ?? "none"
+        let moodMessage = "Now Playing: *" + name + "* by *" + artist + "* from *" + album + "*"
+        
         var params: [String: AnyObject] = [
             "channel" : api_channel,
             "token" : api_token,
