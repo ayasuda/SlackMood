@@ -9,7 +9,9 @@ install xcode
 setup cocoa pods
 
 > $ cd /path/to/SlackMood
+
 > $ sudo gem install cocoapods
+
 > $ pod install
 
 edit api key & channel.
