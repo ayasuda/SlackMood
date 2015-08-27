@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5EED43991B833DD400A82B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED43981B833DD400A82B47 /* AppDelegate.swift */; };
 		5EED439D1B833DD400A82B47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EED439C1B833DD400A82B47 /* Images.xcassets */; };
-		5EED43A01B833DD400A82B47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EED439E1B833DD400A82B47 /* Main.storyboard */; };
 		5EED43AC1B833DD400A82B47 /* SlackMoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED43AB1B833DD400A82B47 /* SlackMoodTests.swift */; };
 		A3E3B67BE919F982FCBB2329 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4BC9FB60558BB29EC790EA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -30,7 +29,6 @@
 		5EED43971B833DD400A82B47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EED43981B833DD400A82B47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EED439C1B833DD400A82B47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5EED439F1B833DD400A82B47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5EED43A51B833DD400A82B47 /* SlackMoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlackMoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EED43AA1B833DD400A82B47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EED43AB1B833DD400A82B47 /* SlackMoodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackMoodTests.swift; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 			children = (
 				5EED43981B833DD400A82B47 /* AppDelegate.swift */,
 				5EED439C1B833DD400A82B47 /* Images.xcassets */,
-				5EED439E1B833DD400A82B47 /* Main.storyboard */,
 				5EED43961B833DD400A82B47 /* Supporting Files */,
 			);
 			path = SlackMood;
@@ -214,7 +211,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EED439D1B833DD400A82B47 /* Images.xcassets in Resources */,
-				5EED43A01B833DD400A82B47 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,17 +297,6 @@
 			targetProxy = 5EED43A61B833DD400A82B47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		5EED439E1B833DD400A82B47 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5EED439F1B833DD400A82B47 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5EED43AD1B833DD400A82B47 /* Debug */ = {
