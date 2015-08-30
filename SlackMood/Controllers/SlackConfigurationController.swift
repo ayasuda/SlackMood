@@ -1,6 +1,6 @@
 import Cocoa
 
-class SlackConfigurationController: NSViewController {
+class SlackConfigurationController: NSWindowController {
     class Config: NSObject {
         var channel: String = ""
         var token: String = ""
@@ -15,8 +15,9 @@ class SlackConfigurationController: NSViewController {
     @IBOutlet weak var channelText: NSTextField!
     @IBOutlet weak var tokenText: NSTextField!
     @IBOutlet weak var okButton: NSButton!
-    
+
     override func awakeFromNib() {
+        super.awakeFromNib()
         loadConfig()
     }
 
@@ -26,6 +27,7 @@ class SlackConfigurationController: NSViewController {
             channelText.stringValue = config.channel
             tokenText.stringValue = config.token
         }
+        syncTexts()
     }
 
     override func controlTextDidChange(obj: NSNotification) {
@@ -42,10 +44,10 @@ class SlackConfigurationController: NSViewController {
         let config = SlackApiConfig(channel: conf.channel, token: conf.token)
         let service = SlackApiConfigService.sharedService()
         service.save(config)
-        self.view.window?.close()
+        close()
     }
 
     @IBAction func cancelClicked(sender: NSButton) {
-        self.view.window?.close()
+        close()
     }
 }

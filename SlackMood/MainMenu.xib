@@ -20,6 +20,12 @@
         </viewController>
         <menu id="95U-Vn-0Q3">
             <items>
+                <menuItem title="Slack Configuration" id="8xg-qb-iue">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="slackConfiguration:" target="gC5-pd-cVM" id="fyn-RC-xHQ"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Quit" id="bpG-TW-mtd">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>

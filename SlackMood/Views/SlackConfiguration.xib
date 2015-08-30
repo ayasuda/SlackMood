@@ -89,7 +89,7 @@ Gw
                 <outlet property="channelText" destination="aA4-Lc-3iG" id="19f-BJ-8Ua"/>
                 <outlet property="okButton" destination="1Va-jN-IU1" id="d6G-nv-a1N"/>
                 <outlet property="tokenText" destination="e0W-Qa-m0k" id="Kbo-8f-jZJ"/>
-                <outlet property="view" destination="EiT-Mj-1SZ" id="sCS-ft-HhX"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="369-mK-kQr"/>
             </connections>
         </customObject>
     </objects>

@@ -1,6 +1,9 @@
 import Foundation
+import Alamofire
 
 class SlackPostingService: NSObject {
+    let postingUri = "https://slack.com/api/chat.postMessage"
+
     static let instance = SlackPostingService()
     class func sharedService() -> SlackPostingService {
         return instance
@@ -29,8 +32,32 @@ class SlackPostingService: NSObject {
 
     private func post(item: PlayingItem) {
         if let config = SlackApiConfigService.sharedService().load() {
-            println("Posting item to #\(config.channel)")
+            let message = createMessage(item)
+            println(message)
+
+            let channel = "#\(config.channel)"
+            let params: [String: AnyObject] = [
+                "channel": channel,
+                "token": config.token,
+                "as_user": true,
+                "text" : message
+            ]
+
+            Alamofire
+                .request(.POST, postingUri, parameters: params, encoding: ParameterEncoding.URL, headers: nil)
+                .response { (request, response, data, error) -> Void in
+                    println(response)
+            }
+
         }
-        println("Listing \(item.name!) by \(item.artist!)")
+    }
+
+    private func createMessage(item: PlayingItem) -> String {
+        let unknown = "(unknown)"
+
+        let name = item.name ?? unknown
+        let artist = item.artist ?? unknown
+
+        return "listening... \(name) - \(artist)"
     }
 }
