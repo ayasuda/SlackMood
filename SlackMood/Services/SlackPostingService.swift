@@ -19,11 +19,18 @@ class SlackPostingService: NSObject {
 
     func update(notification: NSNotification?) {
         if let item = notification?.object! as? PlayingItem {
-            println("Listing \(item.name!) by \(item.artist!)")
+            post(item)
         }
     }
 
     private func notificationCenter() -> NSNotificationCenter {
         return NSNotificationCenter.defaultCenter()
+    }
+
+    private func post(item: PlayingItem) {
+        if let config = SlackApiConfigService.sharedService().load() {
+            println("Posting item to #\(config.channel)")
+        }
+        println("Listing \(item.name!) by \(item.artist!)")
     }
 }
