@@ -8,15 +8,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let api_token = "xoxp-your-api-token" // your slack token
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        NSDistributedNotificationCenter.defaultCenter().addObserver(
-            self, selector: "update:", name: "com.apple.iTunes.playerInfo", object: nil)
+        startServices()
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
-        NSDistributedNotificationCenter.defaultCenter().removeObserver(
-            self, name: "com.apple.iTunes.playerInfo", object: nil)
+        stopServices()
+    }
+
+    private func startServices() {
+        PlayerListeningService.sharedService().start()
+        SlackPostingService.sharedService().start()
     }
     
+    private func stopServices() {
+        PlayerListeningService.sharedService().stop()
+        SlackPostingService.sharedService().stop()
+    }
     
     func update(notification: NSNotification?) {
         if (notification?.userInfo?["Player State"] as? String ?? "none") != "Playing"

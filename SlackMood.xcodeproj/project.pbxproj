@@ -15,6 +15,12 @@
 		D3ADEC671B92B03600E89892 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC651B92B03600E89892 /* StatusMenuController.swift */; };
 		D3ADEC691B92B4FF00E89892 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3ADEC681B92B4FF00E89892 /* MainMenu.xib */; };
 		D3ADEC6A1B92B4FF00E89892 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3ADEC681B92B4FF00E89892 /* MainMenu.xib */; };
+		D3ADEC6D1B92BD1900E89892 /* PlayerListeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */; };
+		D3ADEC6E1B92BD1900E89892 /* PlayerListeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */; };
+		D3ADEC711B92C0E700E89892 /* PlayingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC701B92C0E700E89892 /* PlayingItem.swift */; };
+		D3ADEC721B92C0E700E89892 /* PlayingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC701B92C0E700E89892 /* PlayingItem.swift */; };
+		D3ADEC741B92C58800E89892 /* SlackPostingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC731B92C58800E89892 /* SlackPostingService.swift */; };
+		D3ADEC751B92C58800E89892 /* SlackPostingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC731B92C58800E89892 /* SlackPostingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +45,9 @@
 		79826223398BE14103B53517 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D3ADEC651B92B03600E89892 /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		D3ADEC681B92B4FF00E89892 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerListeningService.swift; sourceTree = "<group>"; };
+		D3ADEC701B92C0E700E89892 /* PlayingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingItem.swift; sourceTree = "<group>"; };
+		D3ADEC731B92C58800E89892 /* SlackPostingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackPostingService.swift; sourceTree = "<group>"; };
 		DA4BC9FB60558BB29EC790EA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				D3ADEC641B92AFE000E89892 /* Controllers */,
+				D3ADEC6F1B92C0B300E89892 /* Models */,
+				D3ADEC6B1B92BCA500E89892 /* Services */,
 				5EED43981B833DD400A82B47 /* AppDelegate.swift */,
 				5EED439C1B833DD400A82B47 /* Images.xcassets */,
 				5EED43961B833DD400A82B47 /* Supporting Files */,
@@ -141,6 +152,23 @@
 				D3ADEC651B92B03600E89892 /* StatusMenuController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D3ADEC6B1B92BCA500E89892 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */,
+				D3ADEC731B92C58800E89892 /* SlackPostingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D3ADEC6F1B92C0B300E89892 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3ADEC701B92C0E700E89892 /* PlayingItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +322,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3ADEC6D1B92BD1900E89892 /* PlayerListeningService.swift in Sources */,
 				5EED43991B833DD400A82B47 /* AppDelegate.swift in Sources */,
+				D3ADEC741B92C58800E89892 /* SlackPostingService.swift in Sources */,
+				D3ADEC711B92C0E700E89892 /* PlayingItem.swift in Sources */,
 				D3ADEC661B92B03600E89892 /* StatusMenuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,7 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3ADEC6E1B92BD1900E89892 /* PlayerListeningService.swift in Sources */,
 				5EED43AC1B833DD400A82B47 /* SlackMoodTests.swift in Sources */,
+				D3ADEC751B92C58800E89892 /* SlackPostingService.swift in Sources */,
+				D3ADEC721B92C0E700E89892 /* PlayingItem.swift in Sources */,
 				D3ADEC671B92B03600E89892 /* StatusMenuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
