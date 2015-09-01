@@ -1,6 +1,8 @@
 SlackMood - Post What Listen on iTunes & AppleMusic to Slack
 ==
 
+![SlackMood](SlackMood.png)
+
 How to compile
 ---
 
@@ -14,11 +16,17 @@ setup cocoa pods
 
 > $ pod install
 
-edit api key & channel.
-You can find your api token [here](https://api.slack.com/web#authentication).
+build SlackMood
 
 > $ open SlackMood.xcworkspace
 
-edit SlackMood/AppDelegate.swift
+open configure window. SlackMood is running on your status bar.
 
-and build!!
+![on your status bar](on_your_status_bar.png)
+
+edit api key & channel.
+You can find your api token [here](https://api.slack.com/web#authentication).
+
+![configure_tokens](configure_tokens.png)
+
+and, play MUSIC!!
