@@ -66,6 +66,7 @@ class PlayerListeningService: NSObject {
     private func createPlayingItem(userInfo: [NSObject : AnyObject]) -> PlayingItem {
         let name   = userInfo["Name"] as? String
         let artist = userInfo["Artist"] as? String
-        return PlayingItem(name: name, artist: artist)
+        let album  = userInfo["Album"] as? String
+        return PlayingItem(name: name, artist: artist, album: album)
     }
 }
