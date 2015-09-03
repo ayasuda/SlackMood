@@ -4,10 +4,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="dON-rQ-AdP" id="4z2-dA-nMC"/>
+            </connections>
+        </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <customObject id="dON-rQ-AdP" customClass="AppDelegate" customModule="SlackMood" customModuleProvider="target"/>
         <customObject id="GzY-WC-Ef3" customClass="StatusMenuController" customModule="SlackMood" customModuleProvider="target">
             <connections>
                 <outlet property="statusMenu" destination="F2S-fz-NVQ" id="uSK-aP-OFv"/>
