@@ -67,6 +67,7 @@ class PlayerListeningService: NSObject {
         let name   = userInfo["Name"] as? String
         let artist = userInfo["Artist"] as? String
         let album  = userInfo["Album"] as? String
-        return PlayingItem(name: name, artist: artist, album: album)
+        let url    = userInfo["Store URL"] as? String
+        return PlayingItem(name: name, artist: artist, album: album, url: url)
     }
 }
