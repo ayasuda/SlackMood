@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
+	<string>Menu</string>
 	<key>LSUIElement</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
