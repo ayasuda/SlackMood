@@ -19,10 +19,9 @@
 		D313D71B1B931F3A0023D514 /* SlackConfiguration.xib in Resources */ = {isa = PBXBuildFile; fileRef = D313D7191B931F3A0023D514 /* SlackConfiguration.xib */; };
 		D313D71D1B931F6E0023D514 /* SlackConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313D71C1B931F6E0023D514 /* SlackConfigurationController.swift */; };
 		D313D71E1B931F6E0023D514 /* SlackConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313D71C1B931F6E0023D514 /* SlackConfigurationController.swift */; };
+		D313D7241B97D3FB0023D514 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D313D7231B97D3FB0023D514 /* Menu.xib */; };
 		D3ADEC661B92B03600E89892 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC651B92B03600E89892 /* StatusMenuController.swift */; };
 		D3ADEC671B92B03600E89892 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC651B92B03600E89892 /* StatusMenuController.swift */; };
-		D3ADEC691B92B4FF00E89892 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3ADEC681B92B4FF00E89892 /* MainMenu.xib */; };
-		D3ADEC6A1B92B4FF00E89892 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3ADEC681B92B4FF00E89892 /* MainMenu.xib */; };
 		D3ADEC6D1B92BD1900E89892 /* PlayerListeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */; };
 		D3ADEC6E1B92BD1900E89892 /* PlayerListeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */; };
 		D3ADEC711B92C0E700E89892 /* PlayingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADEC701B92C0E700E89892 /* PlayingItem.swift */; };
@@ -55,8 +54,8 @@
 		D313D7151B92EA4A0023D514 /* SlackApiConfigService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackApiConfigService.swift; sourceTree = "<group>"; };
 		D313D7191B931F3A0023D514 /* SlackConfiguration.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlackConfiguration.xib; sourceTree = "<group>"; };
 		D313D71C1B931F6E0023D514 /* SlackConfigurationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackConfigurationController.swift; sourceTree = "<group>"; };
+		D313D7231B97D3FB0023D514 /* Menu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Menu.xib; sourceTree = "<group>"; };
 		D3ADEC651B92B03600E89892 /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
-		D3ADEC681B92B4FF00E89892 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		D3ADEC6C1B92BD1900E89892 /* PlayerListeningService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerListeningService.swift; sourceTree = "<group>"; };
 		D3ADEC701B92C0E700E89892 /* PlayingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingItem.swift; sourceTree = "<group>"; };
 		D3ADEC731B92C58800E89892 /* SlackPostingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackPostingService.swift; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 				5EED43981B833DD400A82B47 /* AppDelegate.swift */,
 				5EED439C1B833DD400A82B47 /* Images.xcassets */,
 				5EED43961B833DD400A82B47 /* Supporting Files */,
-				D3ADEC681B92B4FF00E89892 /* MainMenu.xib */,
 			);
 			path = SlackMood;
 			sourceTree = "<group>";
@@ -162,6 +160,7 @@
 		D313D7181B931EFA0023D514 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D313D7231B97D3FB0023D514 /* Menu.xib */,
 				D313D7191B931F3A0023D514 /* SlackConfiguration.xib */,
 			);
 			path = Views;
@@ -279,7 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EED439D1B833DD400A82B47 /* Images.xcassets in Resources */,
-				D3ADEC691B92B4FF00E89892 /* MainMenu.xib in Resources */,
+				D313D7241B97D3FB0023D514 /* Menu.xib in Resources */,
 				D313D71A1B931F3A0023D514 /* SlackConfiguration.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,7 +287,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3ADEC6A1B92B4FF00E89892 /* MainMenu.xib in Resources */,
 				D313D71B1B931F3A0023D514 /* SlackConfiguration.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
