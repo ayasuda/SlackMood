@@ -55,14 +55,23 @@ class SlackPostingService: NSObject {
     private func createMessage(item: PlayingItem) -> String {
         let unknown = "(unknown)"
 
-        let name = item.name ?? unknown
-        let artist = item.artist ?? unknown
-        let album = item.album ?? unknown
+        let name = escape(item.name) ?? unknown
+        let artist = escape(item.artist) ?? unknown
+        let album = escape(item.album) ?? unknown
         if let url = item.url {
             return "Now Playing: *\(name)* by *\(artist)* from :cd: <\(url)|\(album)>"
         }
         else {
             return "Now Playing: *\(name)* by *\(artist)* from :cd: *\(album)*"
         }
+    }
+
+    private func escape(str: String?) -> String? {
+        if let s = str {
+            return s.stringByReplacingOccurrencesOfString("&", withString: "&amp;")
+                .stringByReplacingOccurrencesOfString("<", withString: "&lt;")
+                .stringByReplacingOccurrencesOfString(">", withString: "&gt;")
+        }
+        return str
     }
 }
