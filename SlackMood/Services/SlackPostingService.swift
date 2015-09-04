@@ -58,8 +58,11 @@ class SlackPostingService: NSObject {
         let name = item.name ?? unknown
         let artist = item.artist ?? unknown
         let album = item.album ?? unknown
-        let url = item.url ?? unknown
-
-        return "Now Playing: *\(name)* by *\(artist)* from *\(album)* (\(url))"
+        if let url = item.url {
+            return "Now Playing: *\(name)* by *\(artist)* from :cd: <\(url)|\(album)>"
+        }
+        else {
+            return "Now Playing: *\(name)* by *\(artist)* from :cd: *\(album)*"
+        }
     }
 }
