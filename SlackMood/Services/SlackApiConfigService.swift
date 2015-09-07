@@ -60,7 +60,7 @@ class SlackApiConfigService: NSObject {
 
         let root = paths[0] as? String
         return root.map {
-            $0.stringByAppendingPathComponent("SlackMood")
+            $0.stringByAppendingPathComponent("SlackMood").stringByExpandingTildeInPath
         }
     }
 
