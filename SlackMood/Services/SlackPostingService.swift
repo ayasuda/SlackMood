@@ -3,6 +3,7 @@ import Alamofire
 
 class SlackPostingService: NSObject {
     let postingUri = "https://slack.com/api/chat.postMessage"
+    var slackApiConfig: SlackApiConfig? = SlackApiConfigService.sharedService().load()
 
     static let instance = SlackPostingService()
     class func sharedService() -> SlackPostingService {
@@ -31,7 +32,7 @@ class SlackPostingService: NSObject {
     }
 
     private func post(item: PlayingItem) {
-        if let config = SlackApiConfigService.sharedService().load() {
+        if let config = slackApiConfig {
             let message = createMessage(item)
             println(message)
 
