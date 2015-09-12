@@ -13,6 +13,7 @@ class SlackApiConfigService: NSObject {
     func save(config: SlackApiConfig) {
         FileStore().save(config)
         KeychainStore().saveApiToken(config.token)
+        notifyUpdate(config)
     }
 
     func load() -> SlackApiConfig? {
@@ -39,6 +40,15 @@ class SlackApiConfigService: NSObject {
                 SlackApiConfig(channel: channel, token: token)
             }
         }
+    }
+
+    private func notifyUpdate(config: SlackApiConfig) {
+        let notification = NSNotification(name: "slackmood.apiConfig.updated", object: config)
+        notificationCenter().postNotification(notification)
+    }
+
+    private func notificationCenter() -> NSNotificationCenter {
+        return NSNotificationCenter.defaultCenter()
     }
 
     class FileStore: NSObject {
