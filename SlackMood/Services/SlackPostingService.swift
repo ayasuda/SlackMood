@@ -3,6 +3,7 @@ import Alamofire
 
 class SlackPostingService: NSObject {
     let postingUri = "https://slack.com/api/chat.postMessage"
+    var slackApiConfig: SlackApiConfig? = SlackApiConfigService.sharedService().load()
 
     static let instance = SlackPostingService()
     class func sharedService() -> SlackPostingService {
@@ -10,6 +11,13 @@ class SlackPostingService: NSObject {
     }
 
     private override init() {
+        super.init()
+        observeApiConfig()
+    }
+
+    deinit {
+        stop()
+        unobserveApiConfig()
     }
 
     func start() {
@@ -31,7 +39,7 @@ class SlackPostingService: NSObject {
     }
 
     private func post(item: PlayingItem) {
-        if let config = SlackApiConfigService.sharedService().load() {
+        if let config = slackApiConfig {
             let message = createMessage(item)
             println(message)
 
@@ -73,5 +81,21 @@ class SlackPostingService: NSObject {
                 .stringByReplacingOccurrencesOfString(">", withString: "&gt;")
         }
         return str
+    }
+
+    let apiConfigNotificationName = "slackmood.apiConfig.updated"
+
+    private func observeApiConfig() {
+        notificationCenter().addObserver(self, selector: "didApiConfigUpdated:", name: apiConfigNotificationName, object: nil)
+    }
+
+    private func unobserveApiConfig() {
+        notificationCenter().removeObserver(self, name: apiConfigNotificationName, object: nil)
+    }
+
+    func didApiConfigUpdated(notification: NSNotification) {
+        if let config = notification.object as? SlackApiConfig {
+            slackApiConfig = config
+        }
     }
 }

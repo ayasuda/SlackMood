@@ -1,4 +1,5 @@
 import Foundation
+import KeychainAccess
 
 class SlackApiConfigService: NSObject {
     static let instance = SlackApiConfigService()
@@ -10,27 +11,27 @@ class SlackApiConfigService: NSObject {
     }
 
     func save(config: SlackApiConfig) {
-        if let directory = documentDirectory() {
-            ensureDirectory(directory)
-
-            let data: NSDictionary = [
-                "channel": config.channel,
-                "token": config.token
-            ]
-            let path = dataFilePath(directory)
-            data.writeToFile(path, atomically: true)
-        }
+        FileStore().save(config)
+        KeychainStore().saveApiToken(config.token)
+        notifyUpdate(config)
     }
 
     func load() -> SlackApiConfig? {
-        if let directory = documentDirectory() {
-            let path = dataFilePath(directory)
-            if let data = NSDictionary(contentsOfFile: path) {
+        if let data = FileStore().load() {
+            if let token = loadToken() {
+                let dic = NSMutableDictionary(dictionary: data)
+                dic.setValue(token, forKey: "token")
+                return createConfig(dic)
+            }
+            else {
                 return createConfig(data)
             }
-
         }
         return nil
+    }
+
+    func loadToken() -> String? {
+        return KeychainStore().loadApiToken()
     }
 
     private func createConfig(data: NSDictionary) -> SlackApiConfig? {
@@ -41,37 +42,85 @@ class SlackApiConfigService: NSObject {
         }
     }
 
-    private func ensureDirectory(path: String) {
-        var error: NSError?
+    private func notifyUpdate(config: SlackApiConfig) {
+        let notification = NSNotification(name: "slackmood.apiConfig.updated", object: config)
+        notificationCenter().postNotification(notification)
+    }
 
-        let manager = NSFileManager.defaultManager()
-        if manager.fileExistsAtPath(path) {
-            return
+    private func notificationCenter() -> NSNotificationCenter {
+        return NSNotificationCenter.defaultCenter()
+    }
+
+    class FileStore: NSObject {
+        func save(config: SlackApiConfig) {
+            if let directory = documentDirectory() {
+                ensureDirectory(directory)
+
+                let data: NSDictionary = [
+                    "channel": config.channel,
+                ]
+                let path = dataFilePath(directory)
+                data.writeToFile(path, atomically: true)
+            }
         }
 
-        let success = manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error)
-        if !success {
-            println("Failed to create directory \(path) : \(error)")
+        func load() -> NSDictionary? {
+            if let directory = documentDirectory() {
+                let path = dataFilePath(directory)
+                return NSDictionary(contentsOfFile: path)
+            }
+            return nil
+        }
+
+        private func ensureDirectory(path: String) {
+            var error: NSError?
+
+            let manager = NSFileManager.defaultManager()
+            if manager.fileExistsAtPath(path) {
+                return
+            }
+
+            let success = manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error)
+            if !success {
+                println("Failed to create directory \(path) : \(error)")
+            }
+        }
+
+        private func documentDirectory() -> String? {
+            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomainMask.UserDomainMask, false)
+
+            let root = paths[0] as? String
+            return root.map {
+                $0.stringByAppendingPathComponent("SlackMood").stringByExpandingTildeInPath
+            }
+        }
+
+        private func dataFilePath(prefix: String) -> String {
+            return prefix.stringByAppendingPathComponent("slack-api.plist")
         }
     }
 
-    private func documentDirectory() -> String? {
-        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomainMask.UserDomainMask, false)
+    class KeychainStore: NSObject {
+        private let keychain = Keychain()
+        private let key = "slack-api-token"
 
-        let root = paths[0] as? String
-        return root.map {
-            $0.stringByAppendingPathComponent("SlackMood").stringByExpandingTildeInPath
+        func loadApiToken() -> String? {
+            let failable = keychain.getStringOrError(key)
+            switch failable {
+            case .Success:
+                return failable.value
+            case .Failure:
+                println(failable.error)
+                return nil
+            }
         }
-    }
 
-    private func dataFilePath(prefix: String) -> String {
-        return prefix.stringByAppendingPathComponent("slack-api.plist")
-    }
+        func saveApiToken(token: String) {
+            keychain.set(token, key: key)
+        }
 
-    private func createPropertyList(config: SlackApiConfig) -> NSDictionary {
-        return [
-            "channel": config.channel,
-            "token": config.token
-        ]
+        func destroyApiToken() {
+            keychain.remove(key)
+        }
     }
 }
