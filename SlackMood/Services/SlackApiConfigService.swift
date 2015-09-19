@@ -53,57 +53,46 @@ class SlackApiConfigService: NSObject {
 
     class FileStore: NSObject {
         func save(config: SlackApiConfig) {
-            if let directory = documentDirectory() {
-                ensureDirectory(directory)
+            if let rootUrl = documentRootUrl() {
+                ensureRootUrl(rootUrl)
 
                 let data: NSDictionary = [
                     "channel": config.channel,
                 ]
-                let path = dataFilePath(directory)
-                data.writeToFile(path, atomically: true)
+                let path = dataFileUrl(rootUrl)
+                data.writeToURL(path, atomically: true)
             }
         }
 
         func load() -> NSDictionary? {
-            if let directory = documentDirectory() {
-                let path = dataFilePath(directory)
-                return NSDictionary(contentsOfFile: path)
+            if let rootUrl = documentRootUrl() {
+                let url = dataFileUrl(rootUrl)
+                return NSDictionary(contentsOfURL: url)
             }
             return nil
         }
 
-        private func ensureDirectory(path: String) {
-            var error: NSError?
-
+        private func ensureRootUrl(url: NSURL) {
             let manager = NSFileManager.defaultManager()
-            if manager.fileExistsAtPath(path) {
-                return
-            }
-
-            let success: Bool
             do {
-                try manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
-                success = true
-            } catch let error1 as NSError {
-                error = error1
-                success = false
+                try manager.createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
             }
-            if !success {
-                print("Failed to create directory \(path) : \(error)")
+            catch {
+                print("Failed to create directory \(url): \(error)")
             }
         }
 
-        private func documentDirectory() -> String? {
-            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        private func documentRootUrl() -> NSURL? {
+            let manager = NSFileManager.defaultManager()
+            if let baseUrl = try? manager.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true) {
 
-            let root = paths[0]
-            let baseUrl = NSURL.fileURLWithPath(root, isDirectory: true)
-            return baseUrl.URLByAppendingPathComponent("SlackMood").path
+                return baseUrl.URLByAppendingPathComponent("SlackMood")
+            }
+            return nil
         }
 
-        private func dataFilePath(prefix: String) -> String {
-            let baseUrl = NSURL.fileURLWithPath(prefix, isDirectory: true)
-            return baseUrl.URLByAppendingPathComponent("slack-api.plist").path!
+        private func dataFileUrl(baseUrl: NSURL) -> NSURL {
+            return baseUrl.URLByAppendingPathComponent("slack-api.plist")
         }
     }
 
