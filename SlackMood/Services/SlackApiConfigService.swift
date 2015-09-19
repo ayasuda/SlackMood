@@ -112,15 +112,28 @@ class SlackApiConfigService: NSObject {
         private let key = "slack-api-token"
 
         func loadApiToken() -> String? {
-            return try! keychain.getString(key)
+            if let value = try? keychain.getString(key) {
+                return value
+            }
+            return nil
         }
 
         func saveApiToken(token: String) {
-            try! keychain.set(token, key: key)
+            do {
+                try keychain.set(token, key: key)
+            }
+            catch {
+                print("Failed to save API token in the keychain: \(error)")
+            }
         }
 
         func destroyApiToken() {
-            try! keychain.remove(key)
+            do {
+                try keychain.remove(key)
+            }
+            catch {
+                print("Failed to remove API token in the keychain: \(error)")
+            }
         }
     }
 }
