@@ -80,23 +80,30 @@ class SlackApiConfigService: NSObject {
                 return
             }
 
-            let success = manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error)
+            let success: Bool
+            do {
+                try manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+                success = true
+            } catch let error1 as NSError {
+                error = error1
+                success = false
+            }
             if !success {
-                println("Failed to create directory \(path) : \(error)")
+                print("Failed to create directory \(path) : \(error)")
             }
         }
 
         private func documentDirectory() -> String? {
-            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomainMask.UserDomainMask, false)
+            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomainMask.UserDomainMask, true)
 
-            let root = paths[0] as? String
-            return root.map {
-                $0.stringByAppendingPathComponent("SlackMood").stringByExpandingTildeInPath
-            }
+            let root = paths[0]
+            let baseUrl = NSURL.fileURLWithPath(root, isDirectory: true)
+            return baseUrl.URLByAppendingPathComponent("SlackMood").path
         }
 
         private func dataFilePath(prefix: String) -> String {
-            return prefix.stringByAppendingPathComponent("slack-api.plist")
+            let baseUrl = NSURL.fileURLWithPath(prefix, isDirectory: true)
+            return baseUrl.URLByAppendingPathComponent("slack-api.plist").path!
         }
     }
 
@@ -105,22 +112,15 @@ class SlackApiConfigService: NSObject {
         private let key = "slack-api-token"
 
         func loadApiToken() -> String? {
-            let failable = keychain.getStringOrError(key)
-            switch failable {
-            case .Success:
-                return failable.value
-            case .Failure:
-                println(failable.error)
-                return nil
-            }
+            return try! keychain.getString(key)
         }
 
         func saveApiToken(token: String) {
-            keychain.set(token, key: key)
+            try! keychain.set(token, key: key)
         }
 
         func destroyApiToken() {
-            keychain.remove(key)
+            try! keychain.remove(key)
         }
     }
 }
