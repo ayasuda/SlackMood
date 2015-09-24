@@ -53,50 +53,46 @@ class SlackApiConfigService: NSObject {
 
     class FileStore: NSObject {
         func save(config: SlackApiConfig) {
-            if let directory = documentDirectory() {
-                ensureDirectory(directory)
+            if let rootUrl = documentRootUrl() {
+                ensureRootUrl(rootUrl)
 
                 let data: NSDictionary = [
                     "channel": config.channel,
                 ]
-                let path = dataFilePath(directory)
-                data.writeToFile(path, atomically: true)
+                let path = dataFileUrl(rootUrl)
+                data.writeToURL(path, atomically: true)
             }
         }
 
         func load() -> NSDictionary? {
-            if let directory = documentDirectory() {
-                let path = dataFilePath(directory)
-                return NSDictionary(contentsOfFile: path)
+            if let rootUrl = documentRootUrl() {
+                let url = dataFileUrl(rootUrl)
+                return NSDictionary(contentsOfURL: url)
             }
             return nil
         }
 
-        private func ensureDirectory(path: String) {
-            var error: NSError?
-
+        private func ensureRootUrl(url: NSURL) {
             let manager = NSFileManager.defaultManager()
-            if manager.fileExistsAtPath(path) {
-                return
+            do {
+                try manager.createDirectoryAtURL(url, withIntermediateDirectories: true, attributes: nil)
             }
-
-            let success = manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error)
-            if !success {
-                println("Failed to create directory \(path) : \(error)")
+            catch {
+                print("Failed to create directory \(url): \(error)")
             }
         }
 
-        private func documentDirectory() -> String? {
-            let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomainMask.UserDomainMask, false)
+        private func documentRootUrl() -> NSURL? {
+            let manager = NSFileManager.defaultManager()
+            if let baseUrl = try? manager.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true) {
 
-            let root = paths[0] as? String
-            return root.map {
-                $0.stringByAppendingPathComponent("SlackMood").stringByExpandingTildeInPath
+                return baseUrl.URLByAppendingPathComponent("SlackMood")
             }
+            return nil
         }
 
-        private func dataFilePath(prefix: String) -> String {
-            return prefix.stringByAppendingPathComponent("slack-api.plist")
+        private func dataFileUrl(baseUrl: NSURL) -> NSURL {
+            return baseUrl.URLByAppendingPathComponent("slack-api.plist")
         }
     }
 
@@ -105,22 +101,28 @@ class SlackApiConfigService: NSObject {
         private let key = "slack-api-token"
 
         func loadApiToken() -> String? {
-            let failable = keychain.getStringOrError(key)
-            switch failable {
-            case .Success:
-                return failable.value
-            case .Failure:
-                println(failable.error)
-                return nil
+            if let value = try? keychain.getString(key) {
+                return value
             }
+            return nil
         }
 
         func saveApiToken(token: String) {
-            keychain.set(token, key: key)
+            do {
+                try keychain.set(token, key: key)
+            }
+            catch {
+                print("Failed to save API token in the keychain: \(error)")
+            }
         }
 
         func destroyApiToken() {
-            keychain.remove(key)
+            do {
+                try keychain.remove(key)
+            }
+            catch {
+                print("Failed to remove API token in the keychain: \(error)")
+            }
         }
     }
 }

@@ -41,7 +41,7 @@ class SlackPostingService: NSObject {
     private func post(item: PlayingItem) {
         if let config = slackApiConfig {
             let message = createMessage(item)
-            println(message)
+            print(message)
 
             let channel = "#\(config.channel)"
             let params: [String: AnyObject] = [
@@ -54,7 +54,7 @@ class SlackPostingService: NSObject {
             Alamofire
                 .request(.POST, postingUri, parameters: params, encoding: ParameterEncoding.URL, headers: nil)
                 .response { (request, response, data, error) -> Void in
-                    println(response)
+                    print(response)
             }
 
         }
