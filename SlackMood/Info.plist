@@ -32,5 +32,7 @@
 	<string>Menu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>AppIdentifierPrefix</key>
+	<string>$(AppIdentifierPrefix)</string>
 </dict>
 </plist>

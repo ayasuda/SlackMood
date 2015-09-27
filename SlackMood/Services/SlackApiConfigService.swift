@@ -97,8 +97,21 @@ class SlackApiConfigService: NSObject {
     }
 
     class KeychainStore: NSObject {
-        private let keychain = Keychain()
+        private let keychain: Keychain
         private let key = "slack-api-token"
+
+        override init() {
+            let bundle = NSBundle.mainBundle()
+            let appPrefix = bundle.objectForInfoDictionaryKey("AppIdentifierPrefix")
+            let bundleIdentifier = bundle.bundleIdentifier
+
+            if let prefix = appPrefix, id = bundleIdentifier {
+                keychain = Keychain(accessGroup: "\(prefix)\(id)")
+            }
+            else {
+                keychain = Keychain()
+            }
+        }
 
         func loadApiToken() -> String? {
             if let value = try? keychain.getString(key) {
