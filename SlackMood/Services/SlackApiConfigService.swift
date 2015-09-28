@@ -1,13 +1,13 @@
 import Foundation
 import KeychainAccess
 
-class SlackApiConfigService: NSObject {
+class SlackApiConfigService {
     static let instance = SlackApiConfigService()
     class func sharedService() -> SlackApiConfigService {
         return instance
     }
 
-    private override init() {
+    private init() {
     }
 
     func save(config: SlackApiConfig) {
@@ -51,7 +51,7 @@ class SlackApiConfigService: NSObject {
         return NSNotificationCenter.defaultCenter()
     }
 
-    class FileStore: NSObject {
+    class FileStore {
         func save(config: SlackApiConfig) {
             if let rootUrl = documentRootUrl() {
                 ensureRootUrl(rootUrl)
@@ -96,9 +96,22 @@ class SlackApiConfigService: NSObject {
         }
     }
 
-    class KeychainStore: NSObject {
-        private let keychain = Keychain()
+    class KeychainStore {
+        private let keychain: Keychain
         private let key = "slack-api-token"
+
+        init() {
+            let bundle = NSBundle.mainBundle()
+            let appPrefix = bundle.objectForInfoDictionaryKey("AppIdentifierPrefix")
+            let bundleIdentifier = bundle.bundleIdentifier
+
+            if let prefix = appPrefix, id = bundleIdentifier {
+                keychain = Keychain(accessGroup: "\(prefix)\(id)")
+            }
+            else {
+                keychain = Keychain()
+            }
+        }
 
         func loadApiToken() -> String? {
             if let value = try? keychain.getString(key) {
