@@ -10,3 +10,5 @@ SlackMood.xcodeproj/project.xcworkspace
 SlackMood.xcodeproj/xcuserdata
 SlackMood.xcworkspace/
 Pods
+
+/build
